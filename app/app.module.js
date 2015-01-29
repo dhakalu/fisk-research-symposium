@@ -3,5 +3,6 @@ var rSApp = angular.module('rSApp', [
     'rSAppRoutes',
     'homePageModule',
     'abstractModule',
-    'homeDirectives'
+    'homeDirectives',
+    'abstractDirectives'
 ]);
