@@ -1,1 +1,24 @@
-This is a sample file
+/// ABSTRACT SUBMISSION
+
+
+abstract title
+advisor name (Dropdown) (JSON)
+** co-authors 
+** co-author's email
+external mentor
+abstract
+send the abstract link to advisiors ||
+cancel/ 
+
+/// SIGNUP
+name,
+fisk email
+classification
+major
+password 
+username
+
+// login
+username and password
+
+// logout
