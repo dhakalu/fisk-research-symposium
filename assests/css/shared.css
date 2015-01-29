@@ -1,0 +1,22 @@
+input,
+form>div{
+    margin-top: 5px;
+}
+
+
+.form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+}
+
+.form input.ng-valid.ng-touched {
+    background-color: #78FA89;
+}
+
+h1,h2,h3,h4,h5,h6{
+ margin: 0;   
+ color: #5bc0de;
+}
+
+.black-modal{
+    opacity: 0.4;
+}

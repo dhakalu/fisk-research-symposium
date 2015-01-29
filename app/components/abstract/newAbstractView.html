@@ -1,0 +1,13 @@
+<div class="row">
+  <div ng-controller="formController">
+    <form novalidate class="form">
+      <input type="text" class="form-control" ng-model="abstract.title" placeholder="Title of the abstract" required>
+      <input type="text" class="form-control" ng-model="abstract.author" placeholder="Author">
+      <div >
+	<button class="btn btn-default" my-derective>Add Author</button>
+      </div>
+      <input type="text" class="form-control" ng-model="abstract.advisor">
+      <input type="submit" ng-click="update(user)" value="Save" class="btn btn-primary">
+    </form>
+  </div>
+</div>
