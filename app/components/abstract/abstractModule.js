@@ -10,6 +10,13 @@ abstractRoutes.config(function($routeProvider){
 	    templateUrl: 'app/components/abstract/newAbstractView.html'
 	}).
 	when('/abstract/:abstractid/edit',{
-	    
-	});
+	    templateUrl: 'app/components/abstract/editAbstractView.html'
+	}).
+	when('/abstract/all', {
+	    templateUrl: 'app/components/abstract/allAbstractsView.html'
+	}).
+	when('/abstract/:abstractId', {
+	    templateUrl: 'app/components/abstract/singleAbstractView.html',
+	    controller: 'singleAbstractController'
+	}).otherwise({redirectTo:'/'});
 }); 

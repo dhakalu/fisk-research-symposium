@@ -10,7 +10,7 @@
       <div ng-controller="advisorSelectController">
 	<select class="form-control select-picker" ng-model="formData.advisor">
 	  <option> Select the advisor (Note Advisor will be notified!) </option>
-	  <option ng-repeat="advisor in advisors" value={{advisor}}>{{advisor.firstname}} {{advisor.lastname}}</option>
+	  <option ng-repeat="advisor in advisors | orderBy: 'firstname'" value={{advisor}}>{{advisor.firstname}} {{advisor.lastname}}</option>
 	</select>
       </div>
       <input type="text" class="form-control" ng-model="formData.mentor" placeholder="External Advisior/Mentor(if applicable)">

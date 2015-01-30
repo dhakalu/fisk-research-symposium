@@ -1,3 +1,17 @@
-<table class="table table-stripped table-hover" >
-  
-</table>
+<div class="abstract-lists" ng-controller="abstractListController">
+  <div class="filter-abstract-form row">
+    <input type="text" ng-model="query" class="form-control" placeholder="Search by presenter or title">
+  <div>
+  <div class="row" style="margin-top:10px;">
+    <table class="table">
+      <tr ng-repeat="abstract in abstracts| orderBy:'presenter' | filter:query">
+	<td>
+	  {{abstract.presenter}}
+	</td>
+	<td>
+	  <a ng-href="#/abstract/{{abstract.abstractId}}">{{abstract.title}}</a>
+	</td>
+      </tr>
+      </table>
+  </div>
+</div>
