@@ -1,9 +1,10 @@
-input,
-form>div{
+input, form>div{
     margin-top: 5px;
 }
 
-
+option{
+    margin-bottom: 5px;
+}
 .form input.ng-invalid.ng-touched {
     background-color: #FA787E;
 }
@@ -19,4 +20,9 @@ h1,h2,h3,h4,h5,h6{
 
 .black-modal{
     opacity: 0.4;
+}
+
+textarea{
+    height: 500px;
+    resize: none;
 }

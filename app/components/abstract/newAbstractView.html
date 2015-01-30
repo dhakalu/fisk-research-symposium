@@ -1,15 +1,21 @@
 
 <div class="row">
-  <div>
-    <form novalidate class="form">
-      <input type="text" class="form-control" ng-model="abstract.title" placeholder="Title of the abstract" required>
-      <input type="text" class="form-control" ng-model="abstract.author" placeholder="Author">
+  <div ng-controller="abstractFormController">
+    <form novalidate class="form" ng-submit="submitAbstract()">
+      <input type="text" class="form-control" ng-model="formData.title" placeholder="Title of the abstract" required>
+      <input type="text" class="form-control" ng-model="formData.author" placeholder="Author">
       <div >
 	<button class="btn btn-default" my-derective>Add Author</button>
       </div>
-      <input type="text" class="form-control" ng-model="abstract.advisor">
+      <div ng-controller="advisorSelectController">
+	<select class="form-control select-picker" ng-model="formData.advisor">
+	  <option> Select the advisor (Note Advisor will be notified!) </option>
+	  <option ng-repeat="advisor in advisors" value={{advisor}}>{{advisor.firstname}} {{advisor.lastname}}</option>
+	</select>
+      </div>
+      <input type="text" class="form-control" ng-model="formData.mentor" placeholder="External Advisior/Mentor(if applicable)">
       <div class="abstract-textarea">
-        <textarea ui-tinymce data-ng-model="from_one.from_one"></textarea>
+        <textarea ui-tinymce data-ng-model="formData.abstract"></textarea>
       </div>
       <input type="submit" ng-click="update(user)" value="Save" class="btn btn-primary">
     </form>
