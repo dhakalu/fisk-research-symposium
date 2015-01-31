@@ -2,14 +2,18 @@
 
 <div>
   <div class="abstract-header row">
-    <div class="abstract-title">
+    <div class="abstract-title row">
       <h2>{{abstractObject.title}}</h2>
     </div>
-    <div class="details">
+    <div class="abstract-details row">
+      <div class="presenter-img-container">
+	<img ng-src="assests/img/{{abstractObject.presenter.img}}" alt="{{}}">
+      </div>
+      <div>
       <table class="table">
 	<tr>
 	  <td>Presenter</td>
-	  <td>{{abstractObject.presenter.firstname + ' ' + abstract.presenter.lastname}}</td>
+	  <td>{{abstractObject.presenter.firstname + ' ' + abstractObject.presenter.lastname}}</td>
 	</tr>
 	<tr>
 	  <td>Descipline </td> 

@@ -6,5 +6,13 @@
 }
 
 .abstract-header{
-    margin-bottom: 10px;
+    margin-bottom: 50px;
+}
+
+.abstract-details{
+    margin-top: 15px;
+    display: flex;
+}
+.presenter-img-container{
+    margin-right: 15px;
 }
