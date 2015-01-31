@@ -1,0 +1,10 @@
+.abstract-body{
+    padding: 10px 15px;
+    border-radius: 4px;
+    background: #ccc;
+    border: 1px solid #ddd;
+}
+
+.abstract-header{
+    margin-bottom: 10px;
+}

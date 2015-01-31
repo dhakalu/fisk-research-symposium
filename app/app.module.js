@@ -11,9 +11,17 @@ var rSApp = angular.module('rSApp', [
 	var abstractId = $routeParams.abstractId;
 	var paper = papers[abstractId];
 	var presenter = people[paper.presenter];
-	$scope.paper = paper;
-	$scope.presenter = presenter;
-	$scope.abstractBody = abstracts[abstractId];
+	var descipline = disciplineNames[presenter.discipline];
+	var department = deptNames[descipline.deptId];
+	var title = paper.title;
+	var abstractBody = abstracts[abstractId];
+	$scope.abstractObject = {
+	    'title': title,
+	    'presenter': presenter,
+	    'descipline': descipline.name,
+	    'department': department,
+	    'abstractBody': abstractBody
+	};
     }])
     .controller('abstractListController', ['$scope', function($scope){
 	$scope.abstracts = [];
@@ -42,7 +50,9 @@ var rSApp = angular.module('rSApp', [
 }]).controller('abstractFormController', ['$scope', '$http', function($scope, $http){
     $scope.formData = {};
     $scope.submitAbstract = function(){
+	if($scope.abstractForm.$valid){
+	    $http.post('submit.php', $scope.formData);
+	}
 	console.log($scope.formData);
-	$http.post('submit.php', $scope.formData);
     };
 }]);

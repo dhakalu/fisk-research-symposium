@@ -1,8 +1,8 @@
-input, form>div{
+form{
     margin-top: 5px;
 }
 
-option{
+.form-group{
     margin-bottom: 5px;
 }
 .form input.ng-invalid.ng-touched {
@@ -25,4 +25,12 @@ h1,h2,h3,h4,h5,h6{
 textarea{
     height: 500px;
     resize: none;
+}
+
+table{
+    margin-top: 10px;
+}
+
+.fake-link:hover{
+    cursor: pointer;
 }

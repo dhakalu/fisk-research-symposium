@@ -1,15 +1,30 @@
+<div ng-include="app/shared/navbar/navBarView.html"></div>
+
 <div>
-  <div class="header row">
-    <div class="title">
-      <h2>{{paper.title}}</h2>
+  <div class="abstract-header row">
+    <div class="abstract-title">
+      <h2>{{abstractObject.title}}</h2>
     </div>
-    <hr>
     <div class="details">
-      <h4>{{presenter.firstname + ' ' + presenter.lastname}} </h4>
+      <table class="table">
+	<tr>
+	  <td>Presenter</td>
+	  <td>{{abstractObject.presenter.firstname + ' ' + abstract.presenter.lastname}}</td>
+	</tr>
+	<tr>
+	  <td>Descipline </td> 
+	  <td>{{abstractObject.descipline}}</td>
+	</tr>
+	<tr>
+	  <td>Depatrment </td>
+	  <td>{{abstractObject.department}}</td>
+	</tr>
+      </table>
+      <div>{{abstractObject.school}}</div>
     </div>
   </div>
 
-  <div class="body row">
-    <p> {{abstractBody}} </p>
+  <div class="abstract-body row">
+    <p> {{abstractObject.abstractBody}} </p>
   </div>
 </div>

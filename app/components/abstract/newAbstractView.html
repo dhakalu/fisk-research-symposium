@@ -1,23 +1,93 @@
 
 <div class="row">
   <div ng-controller="abstractFormController">
-    <form novalidate class="form" ng-submit="submitAbstract()">
-      <input type="text" class="form-control" ng-model="formData.title" placeholder="Title of the abstract" required>
-      <input type="text" class="form-control" ng-model="formData.author" placeholder="Author">
-      <div >
-	<button class="btn btn-default" my-derective>Add Author</button>
+    <form novalidate name="abstractForm" ng-submit="submitAbstract()">
+      <!-- Title  -->
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : abstractForm.title.$invalid 
+	   && !abstractForm.title.$pristine}">
+        <input type="text" class="form-control" ng-model="formData.title" 
+	       name="title" placeholder="Title of the abstract" required>
+	<span ng-show="abstractForm.title.$invalid && abstractForm.title.$dirty" 
+	      class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <div ng-show="abstractForm.$submitted || abstractForm.title.$touched"
+	     class="help-block">
+	  <div ng-show="abstractForm.title.$error.required">Title of the abstract is required!</div>
+	</div>
       </div>
-      <div ng-controller="advisorSelectController">
-	<select class="form-control select-picker" ng-model="formData.advisor">
-	  <option> Select the advisor (Note Advisor will be notified!) </option>
-	  <option ng-repeat="advisor in advisors | orderBy: 'firstname'" value={{advisor}}>{{advisor.firstname}} {{advisor.lastname}}</option>
+      <!-- Author  -->
+      <div class="form-group has-feedback" 
+	   ng-class="{'has-error': abstractForm.authorName.$invalid 
+	   && !abstractForm.authorName.$pristine}">
+	<input type="text" class="form-control" 
+	       ng-model="formData.author" name="authorName" placeholder="Author" required="">
+	<span ng-show="abstractForm.authorName.$invalid && abstractForm.authorName.$dirty" 
+	      class="glyphicon glyphicon-remove form-control-feedback"></span>
+	<div ng-show="abstractForm.authorName.$invalid && 
+	     !abstractForm.authorName.$pristine">
+	  <div class="help-block">
+	    At least one author is required. You can add others using the add button below.
+	  </div>
+	</div>
+	<div style="margin-top: 5px;">
+	  <button class="btn btn-default" my-derective>Add Author</button>
+	</div>
+      </div>
+      
+      <!-- Advisor -->
+      <div class="form-group" ng-class="{ 'has-error:' abstractForm.advisor.$invalid}">
+	<div ng-controller="advisorSelectController">
+	  <select class="form-control has-error" 
+		  ng-model="formData.advisor" name="advisor" 
+		  ng-options="advisor.email as advisor.firstname + ' ' +advisor.lastname for advisor in advisors | orderBy: 'firstname'" required>
+	    <option value=""> Select the advisor (Note Advisor will be notified!) </option>
 	</select>
+	<div ng-show="abstractForm.advisor.$invalid && abstractForm.advisor.$dirty">
+	  <div class="help-block">
+	    We require this field as asvisior has to aprove the abstract to be considered for RFS.
+	  </div>
+	</div>
+	</div>
       </div>
-      <input type="text" class="form-control" ng-model="formData.mentor" placeholder="External Advisior/Mentor(if applicable)">
-      <div class="abstract-textarea">
-        <textarea ui-tinymce data-ng-model="formData.abstract"></textarea>
+      <!-- External Advisor -->
+      <div class="form-group">
+	<input type="text" class="form-control" ng-model="formData.mentor" placeholder="External Advisior/Mentor(if applicable)">
       </div>
-      <input type="submit" ng-click="update(user)" value="Save" class="btn btn-primary">
+      <!-- Abstract body -->
+      <div class="form-group" ng-class="{'has-error:' abstractForm.abstractBody.$invalid}">
+        <textarea ui-tinymce data-ng-model="formData.abstract" name="abstractBody" required></textarea>
+      </div>
+
+      <!-- Warning  -->
+      <div class="alert alert-danger" role="alert" ng-show="abstractForm.$invalid">
+	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	<strong> The submit button will only work if you fill the abstract form correctly. 
+	  Please refer to the abstract submmiting guide lines found <a class="fake-link" open-modal> here </a> if you need any help.
+	</strong>
+      </div>
+      
+      <!-- Reminders -->
+      <div class="alert alert-success" role="alert" ng-show="abstractForm.$valid">
+	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+	It seems you correctly filled all the fields. Please note following:
+	<ul>
+	  <li> 
+	    We encourage to review the abstract carefully  as the submission will be final.
+	  </li>
+	  <li>
+	    Only your advisor will have the permission to edit the abstract.
+	  </li> 
+	  <li>
+	    Also, it is very important that you ask your advisor to aprove the abstract. 
+	    If your advisor fails to approve for any reason, your abstract will not be considered for the event!
+	  </li>
+	<br>
+	<b>
+	  Wait! Does your abstract meets <a class="fake-link" open-modal>these</a> guidelines. If not please go ahead and edit them before continuing!
+	</b>
+      </div>
+      <div class="form-group">
+	  <button type="submit" class="btn btn-primary" ng-disabled="abstractForm.$invalid">Submit</button>
+     </div>
     </form>
   </div>
 </div>
