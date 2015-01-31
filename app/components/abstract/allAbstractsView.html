@@ -1,17 +1,23 @@
 <div class="abstract-lists" ng-controller="abstractListController">
   <div class="filter-abstract-form row">
-    <input type="text" ng-model="query" class="form-control" placeholder="Search by presenter or title">
+    <input type="text" ng-model="query" class="form-control row" placeholder="Search by presenter or title">
   <div>
   <div class="row" style="margin-top:10px;">
-    <table class="table">
-      <tr ng-repeat="abstract in abstracts| orderBy:'presenter' | filter:query">
-	<td>
-	  {{abstract.presenter}}
-	</td>
-	<td>
-	  <a ng-href="#/abstract/{{abstract.abstractId}}">{{abstract.title}}</a>
-	</td>
-      </tr>
-      </table>
+      <div ng-repeat="abstract in abstracts| orderBy:'presenter' | filter:query">
+	<div class="box">
+	  <div class="box-header">
+	      <div>
+		{{abstract.title}}
+	      </div>
+	      <div class="actions">
+		  <a class="btn btn-default btn-action" ng-href="#/abstract/{{abstract.abstractId}}">View</a>
+              </div>
+	  </div>
+	  <div class="box-container">
+	    {{abstract.presenter}}
+	  </div>
+	</div>
+      </div>
+    
   </div>
 </div>

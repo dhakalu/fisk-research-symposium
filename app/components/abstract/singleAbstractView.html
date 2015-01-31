@@ -7,28 +7,29 @@
     </div>
     <div class="abstract-details row">
       <div class="presenter-img-container">
-	<img ng-src="assests/img/{{abstractObject.presenter.img}}" alt="{{}}">
+	<img ng-src="assests/img/{{abstractObject.presenter.img}}" height="100" width="100" alt="{{}}">
       </div>
       <div>
-      <table class="table">
-	<tr>
-	  <td>Presenter</td>
-	  <td>{{abstractObject.presenter.firstname + ' ' + abstractObject.presenter.lastname}}</td>
-	</tr>
-	<tr>
-	  <td>Descipline </td> 
-	  <td>{{abstractObject.descipline}}</td>
-	</tr>
-	<tr>
-	  <td>Depatrment </td>
-	  <td>{{abstractObject.department}}</td>
-	</tr>
-      </table>
-      <div>{{abstractObject.school}}</div>
+	<table class="table">
+	  <tr>
+	    <td>Presenter</td>
+	    <td>{{abstractObject.presenter.firstname + ' ' + abstractObject.presenter.lastname}}</td>
+	  </tr>
+	  <tr>
+	    <td>Descipline </td> 
+	    <td>{{abstractObject.descipline}}</td>
+	  </tr>
+	  <tr>
+	    <td>Depatrment </td>
+	    <td>{{abstractObject.department}}</td>
+	  </tr>
+	</table>
+	<div>{{abstractObject.school}}</div>
+      </div>
     </div>
-  </div>
-
+    
   <div class="abstract-body row">
     <p> {{abstractObject.abstractBody}} </p>
+  </div>
   </div>
 </div>
