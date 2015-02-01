@@ -1,25 +1,32 @@
 
 <div class="row">
   <div ng-controller="abstractFormController">
+    <div class="alert alert-warning">
+      The fields with <span class="glyphicon glyphicon-warning-sign"></span> are required! 
+    </div>
     <form novalidate name="abstractForm" ng-submit="submitAbstract()">
       <!-- Title  -->
-      <div class="form-group has-feedback" ng-class="{ 'has-error' : abstractForm.title.$invalid 
+      <div class="form-group has-feedback has-warning" ng-class="{ 'has-error' : abstractForm.title.$invalid 
 	   && !abstractForm.title.$pristine}">
         <input type="text" class="form-control" ng-model="formData.title" 
 	       name="title" placeholder="Title of the abstract" required>
+	<span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+	      ng-show="abstractForm.title.$pristine" aria-hidden="true"></span>
 	<span ng-show="abstractForm.title.$invalid && abstractForm.title.$dirty" 
 	      class="glyphicon glyphicon-remove form-control-feedback"></span>
-        <div ng-show="abstractForm.$submitted || abstractForm.title.$touched"
+        <div ng-show="abstractForm.title.$invalid && abstractForm.title.$dirty"
 	     class="help-block">
 	  <div ng-show="abstractForm.title.$error.required">Title of the abstract is required!</div>
 	</div>
       </div>
       <!-- Author  -->
-      <div class="form-group has-feedback" 
+      <div class="form-group has-feedback has-warning" 
 	   ng-class="{'has-error': abstractForm.authorName.$invalid 
 	   && !abstractForm.authorName.$pristine}">
 	<input type="text" class="form-control" 
 	       ng-model="formData.author" name="authorName" placeholder="Author" required="">
+	<span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+	      ng-show="abstractForm.authorName.$pristine" aria-hidden="true"></span>
 	<span ng-show="abstractForm.authorName.$invalid && abstractForm.authorName.$dirty" 
 	      class="glyphicon glyphicon-remove form-control-feedback"></span>
 	<div ng-show="abstractForm.authorName.$invalid && 
@@ -34,13 +41,15 @@
       </div>
       
       <!-- Advisor -->
-      <div class="form-group" ng-class="{ 'has-error:' abstractForm.advisor.$invalid}">
+      <div class="form-group has-warning" ng-class="{ 'has-error:' abstractForm.advisor.$invalid}">
 	<div ng-controller="advisorSelectController">
 	  <select class="form-control has-error" 
 		  ng-model="formData.advisor" name="advisor" 
 		  ng-options="advisor.email as advisor.firstname + ' ' +advisor.lastname for advisor in advisors | orderBy: 'firstname'" required>
 	    <option value=""> Select the advisor (Note Advisor will be notified!) </option>
 	</select>
+	<span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+	      ng-show="abstractForm.title.$pristine" aria-hidden="true"></span>
 	<div ng-show="abstractForm.advisor.$invalid && abstractForm.advisor.$dirty">
 	  <div class="help-block">
 	    We require this field as asvisior has to aprove the abstract to be considered for RFS.

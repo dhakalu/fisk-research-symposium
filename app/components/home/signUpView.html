@@ -1,0 +1,35 @@
+<div class="modal-content" ng-controller="signUpModalController">
+  <div class="modal-header">
+    <h4> SignUp for Fisk Research Symposium App</h4>
+  </div>
+  <div class="modal-body">
+    <form name="signupForm">
+      <div class="form-group">
+	<input type="text" name="username" ng-model="user.username" 
+	       class="form-control" placeholder="Username" >
+      </div>
+      <div class="form-group">
+	<input type="text" name="firstname" ng-model="user.firstname" 
+	       class="form-control" placeholder="First Name" >
+      </div>
+      <div class="form-group">
+      <input type="text" name="lastname" ng-model="user.lastname" 
+	     class="form-control" placeholder="Last Name" >
+      </div>
+      <div class="form-group">
+	<input type="email" name="email" ng-model="user.email" 
+	       class="form-control" placeholder="Email" >
+      </div>
+      <div class="form-group">
+	<input type="password" name="password" ng-model="user.password"
+	       class="form-control" placeholder="Password">
+      </div>
+      {{user}}
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="signup()">Save changes</button>
+  </div>
+</div>

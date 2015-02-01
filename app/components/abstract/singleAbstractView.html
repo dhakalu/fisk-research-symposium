@@ -16,6 +16,27 @@
 	    <td>{{abstractObject.presenter.firstname + ' ' + abstractObject.presenter.lastname}}</td>
 	  </tr>
 	  <tr>
+	    <td> Classification </td>
+	    <td> {{abstractObject.classification}}
+	  </tr>
+	  <tr>
+	    <td>Authors</td>
+	    <td>
+	      <div class="authors-name">
+	      <span class="inline-list-item" 
+		    ng-repeat="author in abstractObject.authors track by $index">
+		{{author.name}}<sup> {{author.symbol}}</sup> |
+	      </span>
+	      </div>
+	      <div class="author-affs">
+		<div ng-repeat="aff in abstractObject.affilations">
+		  <sup>{{aff.symbol}}</sup> {{aff.school}}
+		</div>
+	      </div>
+	    </td>
+	  </tr>
+	  </tr>
+	  <tr>
 	    <td>Descipline </td> 
 	    <td>{{abstractObject.descipline}}</td>
 	  </tr>

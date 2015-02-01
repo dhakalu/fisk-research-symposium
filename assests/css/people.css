@@ -1,0 +1,23 @@
+.people-container{
+    display: flex;
+    padding: 10px 15px;
+}
+
+.people-container a:hover{
+    text-decoration: none
+}
+.people-container a:visited{
+    text-decoration: none;
+}
+
+.people-details{
+    padding: 0 15px;
+}
+
+.people-name{
+    font-weight: bold;
+}
+
+.people-table{
+    margin-top: 10px;
+}
