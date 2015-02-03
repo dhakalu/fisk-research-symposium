@@ -1,6 +1,11 @@
 var abstractModule = angular.module('abstractModule', [
-    'abstractRoutes'
+    'abstractRoutes',
+    'formModule'
 ]);
+angular.module('formModule', []).
+    controller('formController', ['$scope', function($scope){
+    
+    }]);
 
 var abstractRoutes = angular.module('abstractRoutes', []);
 

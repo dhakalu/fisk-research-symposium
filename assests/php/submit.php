@@ -11,9 +11,7 @@ $query = "INSERT INTO abstract_form(abstract_content) ";
 $query .= "VALUES ('{$abstract}')";
 
 $result = mysql_query($query);
-if(!$result){
-	die("Database Query Failed" . mysql_error());
-}
+confirm_query($result);
 if(mysql_affected_rows() == 1){
 	echo "Record created successfully";
 exit;

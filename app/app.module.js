@@ -152,7 +152,7 @@ var rSApp = angular.module('rSApp', [
     $scope.formData = {};
     $scope.submitAbstract = function(){
 	if($scope.abstractForm.$valid){
-	    $http.post('submit.php', $scope.formData);
+	    $http.post('assests/php/submit.php', $scope.formData);
 	}
 	console.log($scope.formData);
     };
