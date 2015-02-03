@@ -47,7 +47,7 @@ angular.module('openModalDirective', ['ui.bootstrap'])
 	    $scope.user = {};
 	    $scope.user.signup = true;
 	    $scope.signup = function() {
-		if ($scope.signupForm.$valid){
+		if (true){
 		    $http
 			.post('assests/php_scripts/signup.php', $scope.user)
 			.success(function(data){
