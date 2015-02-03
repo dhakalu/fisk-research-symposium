@@ -1,4 +1,4 @@
-<div class="modal-content" ng-controller="signUpModalController">
+<div class="modal-content">
   <div class="modal-header">
     <h4> SignUp for Fisk Research Symposium App</h4>
   </div>
@@ -15,6 +15,17 @@
       <div class="form-group">
       <input type="text" name="lastname" ng-model="user.lastname" 
 	     class="form-control" placeholder="Last Name" >
+      </div>
+      <div class="form-group">
+	<select class="form-control" ng-model="user.classification">
+	  <option selected value=""> Select your classification </option>
+	  <option>Freshmen</option>
+	  <option>Sophomore</option>
+	  <option>Junior</option>
+	  <option>Senior</option>
+	  <option>Graduate Student</option>
+	  <option>Faculty</option>
+	</select>
       </div>
       <div class="form-group">
 	<input type="email" name="email" ng-model="user.email" 

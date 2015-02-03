@@ -46,12 +46,16 @@ angular.module('openModalDirective', ['ui.bootstrap'])
 	var signUpModalController = function($scope, $modalInstance, $http) {
 	    $scope.user = {};
 	    $scope.signup = function() {
-		$http.post('assests/php_scripts/signup.php');
+		$http
+		    .post('assests/php_scripts/signup.php')
+		    .success(function(data){
+			console.log(data);
+		    });
 		console.log($scope.user);
 	    };
 
             $scope.cancel = function() {
-		$modalInstance.dismiss('cancel');
+		$modalInstance.close();
             };
 	};
 	

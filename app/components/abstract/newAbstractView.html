@@ -35,17 +35,37 @@
 	    At least one author is required. You can add others using the add button below.
 	  </div>
 	</div>
-	<div style="margin-top: 5px;">
-	  <button class="btn btn-default" my-derective>Add Author</button>
-	</div>
       </div>
       
+      <!--Author Affilations-->
+
+      <div class="form-group has-feedback has-warning" 
+	   ng-class="{'has-error': abstractForm.authorAff.$invalid 
+	   && !abstractForm.authorName.$pristine}">
+	<input type="text" class="form-control" 
+	       ng-model="formData.author" name="authorAff" placeholder="Affilations e.g Nanomaterial Sensors Group, Department of Physics, Fisk University" required="">
+	<span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+	      ng-show="abstractForm.authorAff.$pristine" aria-hidden="true"></span>
+	<span ng-show="abstractForm.authorAff.$invalid && abstractForm.authorAff.$dirty" 
+	      class="glyphicon glyphicon-remove form-control-feedback"></span>
+	<div ng-show="abstractForm.authorAff.$invalid && 
+	     !abstractForm.authorAff.$pristine">
+	  <div class="help-block">
+	    At least one author is required. You can add others using the add button below.
+	  </div>
+	</div>
+	<!-- Add author button -->
+	<div style="margin-top: 5px;">
+	  <button class="btn btn-default" my-derective>Add Author</button>
+      </div>
+      </div>
+
       <!-- Advisor -->
-      <div class="form-group has-warning" ng-class="{ 'has-error:' abstractForm.advisor.$invalid}">
+      <div class="form-group has-warning" ng-class="{'has-error:' abstractForm.advisor.$invalid}">
 	<div ng-controller="advisorSelectController">
 	  <select class="form-control has-error" 
 		  ng-model="formData.advisor" name="advisor" 
-		  ng-options="advisor.email as advisor.firstname + ' ' +advisor.lastname for advisor in advisors | orderBy: 'firstname'" required>
+		  ng-options="advisor.email as advisor.firstname + ' ' + advisor.lastname for advisor in advisors | orderBy: 'firstname'" required>
 	    <option value=""> Select the advisor (Note Advisor will be notified!) </option>
 	</select>
 	<span class="glyphicon glyphicon-warning-sign form-control-feedback" 
