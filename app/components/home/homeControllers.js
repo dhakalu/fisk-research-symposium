@@ -45,9 +45,10 @@ angular.module('openModalDirective', ['ui.bootstrap'])
     directive('signupModal', ['$modal', function($modal){
 	var signUpModalController = function($scope, $modalInstance, $http) {
 	    $scope.user = {};
+	    $scope.user.signup = true;
 	    $scope.signup = function() {
 		$http
-		    .post('assests/php_scripts/signup.php')
+		    .post('assests/php_scripts/signup.php', $scope.user)
 		    .success(function(data){
 			console.log(data);
 		    });
