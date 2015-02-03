@@ -47,14 +47,20 @@ angular.module('openModalDirective', ['ui.bootstrap'])
 	    $scope.user = {};
 	    $scope.user.signup = true;
 	    $scope.signup = function() {
-		$http
-		    .post('assests/php_scripts/signup.php', $scope.user)
-		    .success(function(data){
-			console.log(data);
-		    });
-		console.log($scope.user);
+		if ($scope.signupForm.$valid){
+		    $http
+			.post('assests/php_scripts/signup.php', $scope.user)
+			.success(function(data){
+			    if(data == "signup_sucess"){
+				$scope.cancel();
+			    }else{
+				$scope.error = data;
+			}
+			});
+		    console.log($scope.user);
+		}
 	    };
-
+	    
             $scope.cancel = function() {
 		$modalInstance.close();
             };
