@@ -7,6 +7,8 @@ baseRoutes.config(function($locationProvider, $routeProvider){
 	}).
 	when('/abstracts',{
 	    templateUrl: 'app/components/abstract/abstractMainView.html'
+	}).when('/login', {
+	    templateUrl: 'app/components/home/loginViewHtml.php'
 	});
 });
 	

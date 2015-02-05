@@ -12,7 +12,7 @@ var abstractRoutes = angular.module('abstractRoutes', []);
 abstractRoutes.config(function($routeProvider){
     $routeProvider.
 	when('/abstract/new',{
-	    templateUrl: 'app/components/abstract/newAbstractView.html'
+	    templateUrl: 'app/components/abstract/newAbstract.php'
 	}).
 	when('/abstract/:abstractid/edit',{
 	    templateUrl: 'app/components/abstract/editAbstractView.html'

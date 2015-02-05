@@ -21,8 +21,9 @@ $tbl_users = "CREATE TABLE IF NOT EXISTS users (
              )";
 $query = mysql_query($tbl_users);
 if ($query === TRUE) {
-	echo "<h3>user table created OK :) </h3>"; 
+  echo "<h3>user table created OK :) </h3>"; 
 } else {
-	echo "<h3>user table NOT created :( </h3>"; 
+  echo "<h3>user table NOT created :( </h3>"; 
 }
+
 ?>

@@ -1,7 +1,22 @@
 var homePageModule = angular.module('homePageModule', ['ui.bootstrap', 'openModalDirective']);
 
-homePageModule.controller('instructionModalController', ['$scope', '$modal', function($scope, $modal) {
-    $scope.items = ['item1', 'item2', 'item3'];
+homePageModule.controller('loginFormController', ['$scope','$sce', '$modal','$http','$location', function($scope, $sce, $modal, $http, $location) {
+    $scope.user = {};
+    $scope.user.login = true;
+    $scope.login = function(){
+	console.log("Hello from login");
+	if(true)$http
+	    .post('assests/php_scripts/login.php', $scope.user)
+	    .success(function(data){
+		console.log(data);
+		if(data == "login_sucess"){
+		    $location.path('#/');
+		}else{
+		    $scope.error = $sce.trustAsHtml(data);
+		}
+	    });
+	console.log($scope.user);
+    };
 }]);
 
 angular.module('openModalDirective', ['ui.bootstrap'])
@@ -74,7 +89,7 @@ angular.module('openModalDirective', ['ui.bootstrap'])
             link: function(scope, element, attrs) {
 		element.bind('click', function() {
 		    var modalInstance = $modal.open({
-			templateUrl: 'app/components/home/signUpView.html',
+			templateUrl: 'app/components/home/signUpView.php',
 			controller:  signUpModalController,
 			size: 'lg',
 			backdrop: 'static',
