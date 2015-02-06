@@ -156,4 +156,31 @@ var rSApp = angular.module('rSApp', [
 	}
 	console.log($scope.formData);
     };
-}]);
+}]).controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+
+  $scope.open = function (size) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/abstract/authorSubmissionView.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+}).controller('ModalInstanceCtrl', function ($scope, $modalInstance, $http) {
+  $scope.authorFormData = {}
+  $scope.submitForm = function () {
+  	$http.post('assests/php_scripts/submitAuthors.php', $scope.authorFormData);
+  	console.log($scope.authorFormData);
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+})

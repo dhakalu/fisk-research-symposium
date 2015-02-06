@@ -1,6 +1,6 @@
 
 <?php
-include_once("php_includes/db_connect.php");
+include_once("db_connect.php");
 
 $tbl_users = "CREATE TABLE IF NOT EXISTS users (
               id INT(11) NOT NULL AUTO_INCREMENT,
