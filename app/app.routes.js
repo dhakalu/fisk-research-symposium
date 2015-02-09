@@ -11,4 +11,3 @@ baseRoutes.config(function($locationProvider, $routeProvider){
 	    templateUrl: 'app/components/home/loginViewHtml.php'
 	});
 });
-	

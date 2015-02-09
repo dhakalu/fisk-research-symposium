@@ -1,0 +1,30 @@
+
+<?php require_once("php_includes/db_connection.php"); ?>
+<?php
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+$body = $request->abstract;
+$title = $request->title;
+$author = $request->author;
+$affiliation = $request->affiliation;
+$type = $request->type;
+$authors = $request->authors;
+$funding = $request->funding;
+$advisor = $request->advisor;
+$external_mentor = null;
+if ($request->mentor){
+    $external_mentor= $request->mentor;
+}
+echo "abstract is: " . $abstract;
+
+$query = "INSERT INTO papers VALUES ('', '$title', '$author', '$affiliation', '$advisor','$type','$external_mentor', '$body', '$funding', now())";
+
+$result = mysql_query($query);
+confirm_query($result);
+if(mysql_affected_rows() == 1){
+	echo "Record created successfully";
+}else { 
+    echo "Something went wrong";
+}
+exit();
+?>

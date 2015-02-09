@@ -97,7 +97,7 @@ angular.module('openModalDirective', ['ui.bootstrap'])
 		    });
 		    
 		    modalInstance.result.then(function() {
-			scope.ngReallyClick();
+			scope.ngSignupModal();
 		    }, function() {
 			//Modal dismissed
 		    });

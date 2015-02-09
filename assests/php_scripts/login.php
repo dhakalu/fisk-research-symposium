@@ -41,7 +41,7 @@ if(isset($_SESSION['username'])){
 			// UPDATE THEIR "IP" AND "LASTLOGIN" FIELDS
 	$sql = "UPDATE users SET ip='$ip', lastlogin=now() WHERE username='$db_username' LIMIT 1";
         $query = mysql_query($sql);
-	header("Location: http://localhost/fisk-research-symposium");
+	echo "login_sucess";
 	exit();
       }
     }
