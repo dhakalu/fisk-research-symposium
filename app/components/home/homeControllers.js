@@ -1,4 +1,16 @@
 var homePageModule = angular.module('homePageModule', ['ui.bootstrap', 'openModalDirective']);
+homePageModule.controller('slideShowController', function ($scope) {
+    var image = function(src, caption){
+	this.image = src;
+	this.caption = typeof caption !== 'undefinde' ? caption: "";
+    };
+    $scope.myInterval = 5000;
+    var slides = $scope.slides = [];
+    slides.push(new image('assests/img/home/slideshow1.JPG'));
+    slides.push(new image('assests/img/home/slideshow2.jpg'));
+    slides.push(new image('assests/img/home/slideshow3.JPG'));
+    slides.push(new image('assests/img/home/slideshow4.JPG'));
+});
 
 homePageModule.controller('loginFormController', ['$scope','$sce', '$modal','$http','$location', function($scope, $sce, $modal, $http, $location) {
     $scope.user = {};
@@ -21,8 +33,9 @@ homePageModule.controller('loginFormController', ['$scope','$sce', '$modal','$ht
 
 angular.module('openModalDirective', ['ui.bootstrap'])
     .directive('openModal', ['$modal', function($modal) {
-	var ModalInstanceCtrl = function($scope, $modalInstance) {
-	    
+	var instructionModalController = function($scope, $modalInstance) {
+	    $scope.formInstructions = formInstructions;
+	    $scope.abstractInstructions = abstractInstructions;
             $scope.cancel = function() {
 		$modalInstance.dismiss('cancel');
             };
@@ -40,7 +53,7 @@ angular.module('openModalDirective', ['ui.bootstrap'])
 		element.bind('click', function() {
 		    var modalInstance = $modal.open({
 			templateUrl: 'app/components/home/instructionModalView.html',
-			controller: ModalInstanceCtrl,
+			controller: instructionModalController,
 			size: 'lg',
 			backdrop: 'static',
 			backdropClass: 'black-modal'

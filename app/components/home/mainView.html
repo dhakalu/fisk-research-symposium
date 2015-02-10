@@ -1,24 +1,150 @@
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+<link href="assests/css/home.css" rel="stylesheet">
 
-<div>
+<style>
+ .funder-img{
+   margin: 10px;
+   margin-right: none;
+   padding: 10px;
+}
+</style>
+
+<div ng-controller="slideShowController" class="page-slideshow">
   <div>
-    <h1>
+    <carousel interval="myInterval">
+      <slide ng-repeat="slide in slides">
+        <img ng-src="{{slide.image}}" style="margin:auto;" height="500px">
+        <div class="carousel-caption">
+          <p>{{slide.text}}</p>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+</div>
+<!-- FRS INTRO -->
+<div class="alert alert-success">
+  <b>We are now accepting the abstracts for FRS-2015. Click  <a href="#/abstract/new"> here</a> to submit your abstract.</b>
+</div>
+
+<div class="frs-intro">
+  <div class="intro-header">
+    <h4>
       What is Fisk Research Symposium?
-    </h1>
+    </h4>
   </div>
-  <div>
-    {{slides}}
+  <hr>
+  <p>
+    Fisk is renowned for engaging students in research and scholarly activities. Empirical research and scholarship are grounded in our academic curriculum, campus support services, and community activities. Our faculty, students and administrators emphasize the discovery and advancement of knowledge through research in the natural and social sciences, business and the humanities.
+    </p>
+    <p>
+      The research symposium is a venue to disseminate and share scholarly contributions with other researchers and scholars. As research contributions and best practices are presented from several disciplines, it provides opportunities for inter-disciplinary research and collaboration. The poster presentations and dialogue with the researchers shows Fisk’s commitment for critical thinking and inquiry-based learning. Further, it strengthens the idea of serendipitous education - acquisition of knowledge in a positive and affirming learning environment.
+      The annual Fisk Research Symposium was first organized in 1999. Prior to 2010 it was called Student Research Day (SRD).
+  </p>
+</div>
+
+<div class="highlights">
+
+  <div class="winners highlight" class="text-center">
+    <div class="highlight-header text-center">
+      Winners 2014
+    </div>
+    <div class="highlight-body text-center">
+      <img src="assests/img/2014/winners/winner.jpg" width="200" height="250px">
+    </div>
+    <div class="highlight-footer text-center">
+      <a class="btn btn-primary" target="_blank">Inspire your self!</a>
+    </div>
   </div>
-  <div>
-    <a class="btn btn-success" ng-href="/fisk-research-symposium/#/abstract/new"> Submit new Abstract </a>
-  </div>
-  <div class="submission-instructions">
-    <div class="submit-instruction-modal">
-      <div>
-	  <button class="btn btn-info" open-modal>Show Submission Instructions</button>
+  
+  <div class="highlight">
+    <div class="pictures">
+      <div class="highlight-header text-center">
+	FRS-2014 in pictures
+      </div>
+      <div class="highlight-body text-center">
+	<img src="assests/img/home/slideshow1.JPG" width="200" height="250px">
+      </div>
+      <div class="highlight-footer text-center">
+	<a href="https://plus.google.com/photos/109250071507114321498/albums/6000387436484274465" class="btn btn-primary" target="_blank">Take a digital tour!</a>
       </div>
     </div>
-    <button signup-modal>
-      SignUp
-    </button>
+  </div>
+  
+  <div class="highlight">
+    <div class="pictures">
+      <div class="highlight-header text-center">
+	Explore more about fisk
+      </div>
+      <div class="highlight-body text-center">
+	<img src="assests/img/fisk_campus.jpg" width="200" height="250px">
+      </div>
+      <div class="highlight-footer text-center">
+	<a class="btn btn-primary" target="_blank" href="http://www.fisk.edu/">Start campous tour</a>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="frs-2015-details">
+  <div class="frs-2015-header">
+  </div>
+  <div class="frs-2015-body">
+    <div>
+      <div class="intro-header">
+	<p>
+	  <h2>17th Annual Fisk Research Symposium</h2>
+	</p>
+      </div>
+      <div class="intro-body">
+	<p>
+	  <b>April 9-10, 2014</b>
+	</p>
+	<p>
+The 16th Annual Fisk University Research Symposium will be held on April 9-10, 2014, in the Appleton Room of Jubilee Hall, Fisk University. The objective of the symposium is to promote research and inter-disciplinary collaboration. The symposium provides an opportunity for our students and faculty to share the results of their recent research efforts with their peers and the university community. Students, faculty, and administrators from all disciplines are invited to submit their abstracts and posters.
+	</p>
+	<p><b>Important dates</b></p>
+	<div class="import-dates">
+	  <div>
+	    <table class="table">
+	      <tr>
+		<td>Abstract Due</td>
+		<td>March 28, 2015</td>
+	      </tr>
+	      <tr>
+		<td>Acceptance Notification</td>
+		<td>March 28, 2015</td>
+	      </tr>
+	      <tr>
+		<td>Poster Submission for Printing  (PPT or PDF format)</td>
+		<td>April 06, 2014 </td>
+	      </tr>
+	      <tr>
+		<td>All posters and presentations</td>
+		<td>April 9, 2014</td>
+	      </tr>
+	      <tr>
+		<td>Keynote Presentation</td>
+		<td> April 10, 2014 at 1:00 pm</td>
+	      </tr>
+	    </table>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="funders" style="display:inblock">
+  <div class="text-center"><h3 style="color:#fff"> Thanks to our sponsors!</h3></div>
+  <div style="display:flex">
+    <div class="funder-img">
+      <img class="img-circle" src="http://placekitten.com/g/200/240" width="100" height="100">
+    </div>
+    <div class="funder-img">
+      <img class="img-circle" src="http://placekitten.com/g/200/240" width="100" height="100">
+    </div>
+    <div class="funder-img">
+      <img class="img-circle" src="http://placekitten.com/200/240" width="100" height="100">
+    </div>
   </div>
 </div>
