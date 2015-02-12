@@ -1,96 +1,192 @@
-<div class="modal-content">
-  <div class="modal-header">
+<style>
+ vertical-align: middle;
+</style>
+<div class="page-content" ng-controller="signUpFormController">
+  <div class="modal-content">
+    <div class="modal-header">
     <h4> SignUp for Fisk Research Symposium App</h4>
-  </div>
-  <div class="modal-body">
-    <form name="signupForm">
-      <div class="form-group has-feedback" ng-class="{'has-warning': signupForm.username.$invalid,
-     'has-error': signupForm.lastname.$invalid && signupForm.username.$dirty,
-     'has-success': signupForm.username.$valid}">
-  <input type="text" name="username" ng-model="user.username" 
-         class="form-control" placeholder="Username" required>
-  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
-        ng-show="signupForm.username.$pristine" aria-hidden="true"></span>
-  <span ng-show="signupForm.username.$invalid && signupForm.username.$dirty" 
-        class="glyphicon glyphicon-remove form-control-feedback"></span>
-  <span ng-show="signupForm.username.$valid" 
-        class="glyphicon glyphicon-ok form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback" ng-class="{'has-warning': signupForm.firstname.$invalid,
-     'has-error': signupForm.lastname.$invalid && signupForm.firstname.$dirty,
-     'has-success': signupForm.firstname.$valid}">
-  <input type="text" name="firstname" ng-model="user.firstname" 
-         class="form-control" placeholder="First Name" required>
-  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
-        ng-show="signupForm.firstname.$pristine" aria-hidden="true"></span>
-  <span ng-show="signupForm.firstname.$invalid && signupForm.firstname.$dirty" 
-        class="glyphicon glyphicon-remove form-control-feedback"></span>
-  <span ng-show="signupForm.firstname.$valid" 
-        class="glyphicon glyphicon-ok form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback" ng-class="{'has-warning': signupForm.lastname.$invalid,
-     'has-error': signupForm.lastname.$invalid && signupForm.lastname.$dirty,
-     'has-success': signupForm.lastname.$valid}">
-  <input type="text" name="lastname" ng-model="user.lastname" 
-       class="form-control" placeholder="Last Name" required>
-      <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
-      ng-show="signupForm.lastname.$pristine" aria-hidden="true"></span>
-      <span ng-show="signupForm.lastname.$invalid && signupForm.lastname.$dirty" 
-      class="glyphicon glyphicon-remove form-control-feedback"></span>
-      <span ng-show="signupForm.lastname.$valid" 
-      class="glyphicon glyphicon-ok form-control-feedback"></span>
-      
-      </div>
-      <div class="form-group has-feedback" ng-class="{'has-warning': signupForm.classification.$invalid,
-     'has-error': signupForm.classification.$invalid && signupForm.classification.$dirty,
-     'has-success': signupForm.classification.$valid}">
-  <select class="form-control" ng-model="user.classification" required>
-    <option selected value=""> Select your classification </option>
-    <option>Freshmen</option>
-    <option>Sophomore</option>
-    <option>Junior</option>
-    <option>Senior</option>
-    <option>Graduate Student</option>
-    <option>Faculty</option>
-  </select>
-      </div>
-      <div class="form-group has-feedback" ng-class="{'has-warning': signupForm.email.$invalid,
-     'has-error': signupForm.email.$invalid && signupForm.email.$dirty,
-     'has-success': signupForm.email.$valid}">
-  <input type="email" name="email" ng-model="user.email" 
-         class="form-control" placeholder="Email" required>
-  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
-        ng-show="signupForm.email.$pristine" aria-hidden="true"></span>
-  <span ng-show="signupForm.email.$invalid && signupForm.email.$dirty" 
-        class="glyphicon glyphicon-remove form-control-feedback"></span>
-  <span ng-show="signupForm.email.$valid" 
-        class="glyphicon glyphicon-ok form-control-feedback"></span>
-
-      </div>
-      <div class="form-group has-feedback" ng-class="{'has-warning': signupForm.password.$invalid,
-     'has-error': signupForm.password.$invalid && signupForm.lastname.$dirty,
-     'has-success': signupForm.password.$valid}">
-  <input type="password" name="password" ng-model="user.password"
-         class="form-control" placeholder="Password" required>
-  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
-        ng-show="signupForm.password.$pristine" aria-hidden="true"></span>
-  <span ng-show="signupForm.password.$invalid && signupForm.password.$dirty" 
-        class="glyphicon glyphicon-remove form-control-feedback"></span>
-  <span ng-show="signupForm.password.$valid" 
-        class="glyphicon glyphicon-ok form-control-feedback"></span>
-      </div>
-    </form>
-  </div>
-  <div> {{error_message}}</div>
-  <div ng-show="signupForm.$invalid" class="alert alert-warning content">
-    Fill all the required field before submitting the form.
-  </div>
-  <div class="modal-footer" style="display: flex">
-    <div>
-      <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
     </div>
-    <div ng-show="signupForm.$valid" style="margin-left: 10px">
-      <button type="button" class="btn btn-primary" ng-click="signup()">Save changes</button>
+    <div class="modal-body">
+      {{user}}
+      <form name="signupForm">
+	<!-- User name -->
+	<div class="form-group has-feedback" 
+	     ng-class="{'has-warning': signupForm.username.$invalid,
+		       'has-error': signupForm.username.$invalid && signupForm.username.$dirty,
+		       'has-success': signupForm.username.$valid}">
+	  <input type="text" name="username" ng-model="user.username" 
+		 class="form-control" placeholder="Username" required>
+	  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+		ng-show="signupForm.username.$pristine" aria-hidden="true"></span>
+	  <span ng-show="signupForm.username.$invalid && signupForm.username.$dirty" 
+		class="glyphicon glyphicon-remove form-control-feedback"></span>
+	  <span ng-show="signupForm.username.$valid" 
+		class="glyphicon glyphicon-ok form-control-feedback"></span>
+	</div>
+	<!-- First Name -->
+	<div class="form-group has-feedback" ng-class="{'has-warning': signupForm.firstname.$invalid,
+						       'has-error': signupForm.firstname.$invalid && signupForm.firstname.$dirty,
+     'has-success': signupForm.firstname.$valid}">
+	  <input type="text" name="firstname" ng-model="user.firstname" 
+		 class="form-control" placeholder="First Name" required>
+	  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+		ng-show="signupForm.firstname.$pristine" aria-hidden="true"></span>
+	  <span ng-show="signupForm.firstname.$invalid && signupForm.firstname.$dirty" 
+		class="glyphicon glyphicon-remove form-control-feedback"></span>
+	  <span ng-show="signupForm.firstname.$valid" 
+		class="glyphicon glyphicon-ok form-control-feedback"></span>
+	</div>
+	<!-- Last name -->
+	<div class="form-group has-feedback" 
+	     ng-class="{'has-warning': signupForm.lastname.$invalid,
+		       'has-error': signupForm.lastname.$invalid && signupForm.lastname.$dirty,
+		       'has-success': signupForm.lastname.$valid}">
+	  <input type="text" name="lastname" ng-model="user.lastname" 
+		 class="form-control" placeholder="Last Name" required>
+	  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+		ng-show="signupForm.lastname.$pristine" aria-hidden="true"></span>
+	  <span ng-show="signupForm.lastname.$invalid && signupForm.lastname.$dirty" 
+		class="glyphicon glyphicon-remove form-control-feedback"></span>
+	  <span ng-show="signupForm.lastname.$valid" 
+		class="glyphicon glyphicon-ok form-control-feedback"></span>
+	</div>
+	
+	<!-- Email -->
+	<div class="form-group has-feedback" 
+	     ng-class="{'has-warning': signupForm.email.$invalid,
+		       'has-error': signupForm.email.$invalid && signupForm.email.$dirty,
+		       'has-success': signupForm.email.$valid}">
+	  <input type="email" name="email" ng-model="user.email" 
+               class="form-control" placeholder="Email" required>
+	  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+		ng-show="signupForm.email.$pristine" aria-hidden="true"></span>
+	  <span ng-show="signupForm.email.$invalid && signupForm.email.$dirty" 
+		class="glyphicon glyphicon-remove form-control-feedback"></span>
+	  <span ng-show="signupForm.email.$valid" 
+		class="glyphicon glyphicon-ok form-control-feedback"></span>
+	  
+	</div>
+	
+      <!-- Password  -->
+	<div class="form-group has-feedback" 
+	     ng-class="{'has-warning': signupForm.password.$invalid,
+		       'has-error': signupForm.password.$invalid && signupForm.lastname.$dirty,
+		       'has-success': signupForm.password.$valid}">
+	  <input type="password" name="password" ng-model="user.password"
+               class="form-control" placeholder="Password" required>
+	  <span class="glyphicon glyphicon-warning-sign form-control-feedback" 
+		ng-show="signupForm.password.$pristine" aria-hidden="true"></span>
+	  <span ng-show="signupForm.password.$invalid && signupForm.password.$dirty" 
+		class="glyphicon glyphicon-remove form-control-feedback"></span>
+	  <span ng-show="signupForm.password.$valid" 
+		class="glyphicon glyphicon-ok form-control-feedback"></span>
+	</div>
+      
+	<!--  Clasification -->
+	<div class="form-group has-feedback" 
+	     ng-class="{'has-warning': signupForm.classification.$invalid,
+		       'has-error': signupForm.classification.$invalid && signupForm.classification.$dirty,
+		       'has-success': signupForm.classification.$valid}">
+	  <select class="form-control" ng-model="user.classification" required>
+	    <option selected value=""> Select your classification </option>
+	    <option>Freshmen</option>
+	    <option>Sophomore</option>
+	    <option>Junior</option>
+	    <option>Senior</option>
+	    <option>Graduate Student</option>
+	    <option>Faculty</option>
+	  </select>
+	</div>
+	
+	
+	<!-- Discipline -->
+	<div class="form-group" 
+	     ng-class="{'has-warning': !signupForm.discipline.$dirty, 
+		       'has-error': signupForm.discipline.$invalid && signupForm.discipline.$dirty,
+		       'has-success': signupForm.discipline.$valid}">
+	  <select name="discipline" class="form-control" 
+		  ng-model="user.discipline"
+		  ng-options="discipline.did as discipline.name for discipline in disciplines | orderBy: 'name'" required>
+	    <option value="">Plese select your discipline.</option>
+	  </select>
+	</div>
+
+	<!-- Institution -->
+	<div class="form-group" 
+	     ng-class="{'has-warning': !signupForm.institution.$dirty, 
+		       'has-error': signupForm.institution.$invalid && signupForm.institution.$dirty,
+		       'has-success': signupForm.institution.$valid}">
+	  <select name="institution" class="form-control" 
+		  ng-model="user.institution"
+		  ng-options="institution.id as institution.name for institution in institutions | orderBy: 'name'" required>
+	    <option value="">Plese select a institution.</option>
+	  </select>
+	</div>
+	<!-- Add institution subform !-->
+	<div ng-show="user.institution == '1'">
+	  <div>
+	    <div class="has-feedback form-group" 
+		 ng-class="{'has-error': signupForm.instName.$invalid && !signupForm.instName.$dirty,
+			   'has-warning': signupForm.instName.$invalid && signupForm.instName.$dirty,
+			   'has-success': signupForm.instName.$valid
+			   }">
+	      <input type="text" class="form-control" 
+		     placeholder="Name of Institution" 
+		     name="instName"
+		     ng-model="user.instname"
+		     required>
+	    </div>
+	    <div class="row form-group">
+	       <div class="col-md-3"
+		   ng-class="{'has-error': signupForm.instCity.$invalid && !signupForm.instCity.$dirty,
+			     'has-warning': signupForm.instCity.$invalid && signupForm.instCity.$dirty,
+			     'has-success': signupForm.instCity.$valid
+			     }">
+		<input type="text" class="form-control" name="instCity" ng-model="user.instcity" placeholder="City" required>
+	      </div>
+
+
+ <div class="col-md-3"
+		   ng-class="{'has-error': signupForm.instState.$invalid && !signupForm.instName.$dirty,
+			     'has-warning': signupForm.instState.$invalid && signupForm.instState.$dirty,
+			     'has-success': signupForm.instState.$valid
+			     }">
+		<input type="text" class="form-control" name="instState" ng-model="user.inststate" placeholder="State" required>
+	      </div>
+	      <div class="col-md-3"
+		   ng-class="{'has-error': signupForm.instZip.$invalid && !signupForm.instZip.$dirty,
+			     'has-warning': signupForm.instZip.$invalid && signupForm.instZip.$dirty,
+			     'has-success': signupForm.instZip.$valid
+			     }">
+		
+		<input type="text" class="form-control" name="instZip" placeholder="Zip" ng-model="user.instzip" required>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Department -->
+	<div class="form-group" ng-show="user.institution == '2'"
+	     ng-class="{
+		       'has-warning': !signupForm.department.$dirty,
+		       'has-error': signupForm.department.$invalid && signupForm.department.$dirty,
+		       'has-success': signupForm.department.$valid}">
+	  <select name="department" class="form-control" 
+		  ng-model="user.department"
+		  ng-options="department.dpt_id as department.title for department in departments | orderBy: 'title'" required>
+	    <option value="">Plese select Department of the author.</option>
+	  </select>
+	</div>  
+      </form>
+      <div class="alert alert-warning" style="margin: 10px 10px;">
+	<b>{{error}}</b>
+      </div>
+    </div>
+    {{validInstitution}}
+    <div class="modal-footer" style="display: flex">
+      <div ng-show="signupFormIsValid()" style="margin-left: 10px">
+	<button type="button" class="btn btn-primary" ng-click="signup()">Create an account</button>
+      </div>
     </div>
   </div>
 </div>

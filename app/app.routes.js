@@ -9,5 +9,8 @@ baseRoutes.config(function($locationProvider, $routeProvider){
 	    templateUrl: 'app/components/abstract/abstractMainView.html'
 	}).when('/login', {
 	    templateUrl: 'app/components/home/loginViewHtml.php'
+	}).when('/signup', {
+	    templateUrl: 'app/components/home/signUpView.html',
+	    controller: 'signUpFormController'
 	});
 });

@@ -1,0 +1,9 @@
+<div>
+  <h1>Congratulations! You sucessfully submitted the abstract for FRS-2015.</h1>
+  <div>
+    <button calss="btn btn-primary">Take me back to home page</button>
+  </div>
+  <div>
+    <a href="abstracts/manage" class="btn btn-primary">Manage my abstracts</a>
+  </div>
+</div>

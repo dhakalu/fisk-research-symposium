@@ -16,7 +16,7 @@ if(isset($_SESSION['username'])){
       echo "Both username and password is required";
       exit();
     } else {
-      $sql = "SELECT id, username, password FROM users WHERE username='$username' OR email='$username' LIMIT 1";
+      $sql = "SELECT id, username, password FROM user WHERE username='$username' OR email='$username' LIMIT 1";
       $query = mysql_query($sql);
       $numUser=mysql_num_rows($query);
       if($numUser<1){
@@ -39,7 +39,7 @@ if(isset($_SESSION['username'])){
 	setcookie("user", $db_username, strtotime( '+30 days' ), "/", "", "", TRUE);
 	setcookie("pass", $db_p_hash, strtotime( '+30 days' ), "/", "", "", TRUE); 
 			// UPDATE THEIR "IP" AND "LASTLOGIN" FIELDS
-	$sql = "UPDATE users SET ip='$ip', lastlogin=now() WHERE username='$db_username' LIMIT 1";
+	$sql = "UPDATE user SET ip='$ip', lastlogin=now() WHERE username='$db_username' LIMIT 1";
         $query = mysql_query($sql);
 	echo "login_sucess";
 	exit();

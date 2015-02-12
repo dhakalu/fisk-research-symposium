@@ -1,30 +1,45 @@
 
 <?php
-include_once("php_includes/db_connect.php");
-$postdata = file_get_contents("php://input");
-$request = json_decode($postdata);
-$body = $request->abstract;
-$title = $request->title;
-$author = $request->author;
-$affiliation = $request->authorAff;
-$type = $request->type;
-$authors = $request->authors;
-$funding = $request->funding;
-$advisor = $request->advisor;
-$external_mentor = null;
-if ($request->mentor){
-    $external_mentor= $request->mentor;
+session_start();
+if(isset($_SESSION['username'])){
+    include_once("db_connection.php");
+    $presenter = $_SESSION['username'];
+    $postdata = file_get_contents("php://input");
+    $request = json_decode($postdata);
+    $body = $request->abstract;
+    $title = $request->title;
+    $type = $request->type;
+    $authors = $request->authors;
+    $advisor = $request->advisor;
+    $external_mentor = null;
+    if (isset($request->mentor)){
+        $external_mentor= $request->mentor;
+    }
+    $paper = R::dispense('abstract');
+    $paper->title = $title;
+    $paper->advisor = $advisor;
+    $paper->body = $body;
+    $paper->presenter= $presenter;
+    $paper_id = R::store($paper);
+    
+    foreach($authors as $author){
+        if(!isset($author->isinDataBase)){
+            include_once('signup.php');
+            $min = 1000;
+            $max= 100000;
+            $author->signup = true;
+            $author->password = rand($min, $max);
+            signup($author);
+        }
+        $ath = R::dispense('author');
+        $ath->username = $author->username;
+        $ath->abstract_id = $paper_id;
+        $ath->order = (isset($author->order)? $author->order: 1);
+        R::store($ath);
+    }
+    echo '200';
+}else{
+    echo '404';   
 }
-$query = "INSERT INTO papers VALUES ('', '$title', '$author', '$affiliation', '$advisor','$type','$external_mentor', '$body', '$funding', now(), '0')";
-$result = mysql_query($query);
-// We need the id of the abstract to insert the authors to the authors table
-$abstract_id = mysql_insert_id();
-foreach($authors as $author){
-$name = $author->name;
-$aff = $author->affiliation;
-$addAuthorQuery = "INSERT INTO authors VALUES('', '$abstract_id', '$name', 'noemail', '$aff')";
-mysql_query($addAuthorQuery);
-} 
-
 exit();
 ?>

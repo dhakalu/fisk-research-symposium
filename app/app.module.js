@@ -8,9 +8,35 @@ var rSApp = angular.module('rSApp', [
     'abstractDirectives',
     'peopleModule'
 ]) 
-    .factory('abstractFactory', function(){
+    .factory('abstractFactory', function($http){
 	var factory = {};
 	// Returns the full name of the people
+
+	factory.getAllUsers = function(callback){
+	    $http.get('assests/php_scripts/getuserinfo.php?all_json')
+		.success(function(data){
+		    callback(data);
+		});
+	};
+	
+	factory.getInstitutions=function(callback){
+	    $http.get('assests/php_scripts/getdata.php?institutions_json').
+		success(function(data){
+		    callback(data);
+		});
+	};
+
+	factory.getDepartments = function(callback){
+	    $http.get('assests/php_scripts/getdata.php?departments_json').
+		success(function(data){
+		    callback(data);
+		});
+	};
+	factory.getDisciplines = function(callback){
+	    $http.get('assests/php_scripts/getdata.php?disciplines_json').success(function(data){
+		callback(data);
+	    });
+	};
 	var getFullName = function(peopleId){
 	    var currPeople = people[peopleId];
 	    return currPeople.firstname + ' ' + currPeople.lastname;
@@ -111,5 +137,12 @@ var rSApp = angular.module('rSApp', [
         return function(text) {
             return $sce.trustAsHtml(text);
         };
-    }]);
-    
+    }]).filter('range', function() {
+	return function(input, min, max) {
+	    min = parseInt(min); //Make string input int
+	    max = parseInt(max);
+	    for (var i=min; i<max; i++)
+		input.push(i);
+	    return input;
+	};
+    });

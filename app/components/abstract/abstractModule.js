@@ -20,8 +20,16 @@ abstractRoutes.config(function($routeProvider){
 	when('/abstract/all', {
 	    templateUrl: 'app/components/abstract/allAbstractsView.html'
 	}).
+	when('/abstract/success', {
+	    templateUrl: 'app/components/abstract/sucess.html'
+	}).
+	when('/abstract/manage', {
+	    templateUrl: 'app/components/abstract/manage.php',
+	    controller: 'manageAbstractController'
+	}).
 	when('/abstract/:abstractId', {
 	    templateUrl: 'app/components/abstract/singleAbstractView.html',
 	    controller: 'singleAbstractController'
-	}).otherwise({redirectTo:'/'});
+	}).
+	otherwise({redirectTo:'/'});
 }); 
