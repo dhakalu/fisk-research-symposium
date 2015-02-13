@@ -1,0 +1,8 @@
+<div style="backgroud:fff; borer-radius:10px;">
+  <div>
+    The page that you are trying to access is broken!
+  </div>
+  <div>
+    <img src="assests/img/errors/broken-page.jpg">
+  </div>
+</div>

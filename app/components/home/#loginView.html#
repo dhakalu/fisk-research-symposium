@@ -1,0 +1,24 @@
+<div ng-controller="loginFormController">
+  <form name="loginForm">
+    <div class="form-group has-feedback">
+      <input type="text" loname="username" ng-model="user.username"
+	     class="form-control" placeholder="Your username or email" required>
+      <div ng-show="loginForm.username.$invalid && loginForm.username.$dirty">
+	Username is the required field
+      </div>
+    </div>
+    <div class="form-group has-feedback">
+      <input type="password" name="password" ng-model="user.password"
+	     class="form-control"  placeholder="Password of your account" required>
+      <div ng-show="loginForm.password.$invalid && loginForm.password.$dirty">
+	Password is required
+      </div>
+    </div>
+    <div class="has-error">
+      <strong ng-bind-html="error">{{error}}</strong>
+    </div>
+    <button class="btn btn-success" ng-click="login()">LogIn</button>
+
+  </form>
+ 
+</div>

@@ -192,6 +192,7 @@ var abstractController = angular.module('abstractControllers', []).
 		$scope.addAuthor = !$scope.addAuthor;
 		$scope.authorFormData = {};
 		$scope.authorNumber += 1;
+		$scope.cancelAddingAuthor();
 	    };
 	    $scope.cancelAddingAuthor = function(){
 		$scope.addAuthor = !$scope.addAuthor;

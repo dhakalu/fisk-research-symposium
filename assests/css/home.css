@@ -1,0 +1,61 @@
+.frs-intro{
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #C4C4C4;
+    margin-top: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.carousel-inner{
+    max-height: 500px;
+}
+
+.highlights.ng-scope{
+    z-index: 46;
+    border-color: #C4C4C4;
+    background-color: #535353;
+    display: flex;
+    marging-bottom: 40px;
+}
+
+.highlight{
+    margin: 40px;
+    margin-right: 0;
+    background: #fff;
+    width: 270px;
+    padding: 5px;
+}
+
+.highlight-header{
+    margin: 10px 0px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.highlight-body{
+    padding: 10px 15px;
+    margin: 10px;
+}
+
+.highlight-footer{
+    padding: 10px 15px;
+}
+
+.frs-2015-details{
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #C4C4C4;
+}
+
+.funders{
+    padding: 10px 15px;
+    border-color: #C4C4C4;
+    background-color: #535353;
+    margin-bottom: 20px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
