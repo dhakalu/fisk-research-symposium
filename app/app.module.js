@@ -8,7 +8,7 @@ var rSApp = angular.module('rSApp', [
     'abstractDirectives',
     'peopleModule'
 ]) 
-    .factory('abstractFactory', function($http){
+    .factory('abstractFactory', function($rootScope, $http){
 	var factory = {};
 	// Returns the full name of the people
 
@@ -37,6 +37,12 @@ var rSApp = angular.module('rSApp', [
 		callback(data);
 	    });
 	};
+	factory.getLogedUser = function(callback){
+	    $http.get('assests/php_scripts/getdata.php?getloged_user').success(function(data){
+		callback(data);
+	    });
+	};
+
 	var getFullName = function(peopleId){
 	    var currPeople = people[peopleId];
 	    return currPeople.firstname + ' ' + currPeople.lastname;

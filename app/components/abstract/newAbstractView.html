@@ -1,4 +1,22 @@
+
 <style>
+ .added-author{
+   padding: 10px 15px;
+   border-bottom: 1px solid #fff;
+ }
+ .added-author-details{
+    display: flex;
+ }
+ .added-author select{
+   background: fff;
+   border-radius: 4px;
+   height: 25px;
+   min-width: 40px;
+ }
+
+.added-author.btn{
+  padding: 3px 10px;
+}
  .author-suggestion{
    background: white;
    z-index: 1000;
@@ -8,23 +26,30 @@
    border: 1px solid #ccc;
    border-top: none;
  }
+ 
+ .author-querybox{
+   border-bottom-left-radius: 0;
+   border-bottom-right: 0;
+ }
+ .suggested-user{
+   padding: 10px;
+ }
+ .suggested-user:hover{
+   cursor: pointer;
+   background: #ccc;
+ }
 
-.author-querybox{
-  border-bottom-left-radius: 0;
-  border-bottom-right: 0;
-}
-.suggested-user{
-  padding: 10px;
-}
-.suggested-user:hover{
-  cursor: pointer;
-  background: #ccc;
-}
+ .added-author-list{
+   padding: 10px 15px;
+ }
+ .added-author-affiliation{
+   margin: 10px 0;
+ }
 </style>
 <!-- PAGE CONTENTS  -->
 <div class="row">
   <div ng-controller="abstractFormController">
-   {{formData}}
+    {{formData}}
     <div class="alert alert-warning">
       The fields with <span class="glyphicon glyphicon-warning-sign"></span> are required! 
     </div>
@@ -46,76 +71,62 @@
 	     class="help-block">
 	  <div ng-show="abstractForm.title.$error.required">Title of the abstract is required!</div>
 	</div>
-      </div>
-      <!-- Author  -->
-      <div class="form-group has-feedback" 
-	   ng-class="{'has-warning': abstractForm.authorName.$invalid, 
-	   'has-error': abstractForm.authorName.$invalid && !abstractForm.authorName.$pristine, 
-	   'has-success': abstractForm.authorName.$valid}">
-	<input type="text" class="form-control" 
-	       ng-model="formData.author" name="authorName" placeholder="Author" required="">
-	<span class="glyphicon glyphicon-warning-sign form-control-feedback" 
-	      ng-show="abstractForm.authorName.$pristine" aria-hidden="true"></span>
-	<span ng-show="abstractForm.authorName.$invalid && abstractForm.authorName.$dirty" 
-	      class="glyphicon glyphicon-remove form-control-feedback"></span>
-	<span ng-show="abstractForm.authorName.$valid" 
-	      class="glyphicon glyphicon-ok form-control-feedback"></span>
-	<div ng-show="abstractForm.authorName.$invalid && 
-	     !abstractForm.authorName.$pristine">
-	  <div class="help-block">
-	    At least one author is required. You can add others using the add button below.
-	  </div>
-	</div>
-      </div>
-      
+      </div>      
       <!--Author Affilations-->
 
-      <div class="form-group has-feedback" 
-	   ng-class="{'has-warning': abstractForm.authorAff.$invalid,
-		     'has-error': abstractForm.authorAff.$invalid && !abstractForm.authorAff.$pristine,
-		     'has-success': abstractForm.authorAff.$valid}">
-	<input type="text" class="form-control" 
-	       ng-model="formData.aff" name="authorAff" placeholder="Affilations e.g Nanomaterial Sensors Group, Department of Physics, Fisk University" required="">
-	<span class="glyphicon glyphicon-warning-sign form-control-feedback" 
-	      ng-show="abstractForm.authorAff.$pristine" aria-hidden="true"></span>
-	<span ng-show="abstractForm.authorAff.$invalid && abstractForm.authorAff.$dirty" 
-	      class="glyphicon glyphicon-remove form-control-feedback"></span>
-	<span ng-show="abstractForm.authorAff.$valid" 
-	      class="glyphicon glyphicon-ok form-control-feedback"></span>
-	<div ng-show="abstractForm.authorAff.$invalid && 
-		      !abstractForm.authorAff.$pristine">
-	  <div class="help-block">
-	    At least one author is required. You can add others using the add button below.
+      <!-- Show the list of authors added -->
+      <div class="added-author-list box">
+	<div ng-show="formData.authors.length > 0" style="margin: 10px 0">
+	  <div>
+	    <b>Authors (Please mention the preference of each other.)</b>
 	  </div>
-	</div>
-	<!-- Show the list of authors added -->
-	<div class="box" ng-show="formData.authors.length > 0" style="margin: 10px 0">
-	  <div class="box-container">
-	    <b>Added authors(Inorder of preference)</b>
-	    <ol>
-	      <li ng-repeat="author in formData.authors" style="display:flex">
+	  <div>
+	    <div ng-repeat="author in formData.authors">
+	      <div class="added-author">
+		<div class="added-author-details">
+		  <div>
+		    <span>
+		      <select ng-model="author.order"
+			      ng-change="changeOrder(x, author)"
+			      ng-options="x for x in [] | range:1:6">
+		      </select>
+		    </span>
+		    <span style="margin-left: 20px">{{author.firstname + ' ' + author.lastname}}</span>
+		  </div>
+		  <div style="margin-left: auto">
+		    <input type="checkbox" ng-click="makePresenter(author.username)" ng-checked="author.presenter"> Presenter
+		    <button ng-click="removeAuthor(author)" class="btn" style="margin-left: 10px;">Remove</button>
+		  </div>
+		</div>
 		<div>
-		  <span>
-		    <select ng-model="x"
-			    ng-change="changeOrder(x, author)"
-			    ng-options="x for x in [] | range:1:5">
-		    </select>
-		  </span>
-		  <span style="margin-left: 20px">{{author.firstname + ' ' + author.lastname}}</span>
+		  <div ng-repeat="affiliation in author.affiliations" class="added-author-affiliation">
+		    <span class="glyphicon glyphicon-remove" ng-click="removeAffiliation(author)"></span>
+		    <span>
+		      {{getUserDiscipline(affiliation.discipline)}}
+		    </span>
+		    <span ng-show="getUserDepartment(affiliation.department)">
+		      , Department of {{getUserDepartment(affiliation.department)}}
+		    </span>
+		    <span ng-if="affiliation.institution != 1">
+		      , {{getUserInstitution(affiliation.institution)}}
+		    </span>
+		    <span ng-if="affiliation.institution == 1 && affiliation.instname ">
+		      , {{affiliation.instname}}, {{affiliation.instcity}}, {{affiliation.inststate}} {{affiliation.instzip}}
+		    </span>
+		  </div>
+		  <div>
+		    <button ng-click="addNewAffiliation(author)" affiliation-modal>Add affiliation</button>
+		  </div>
 		</div>
-		<div style="margin-left: auto">
-		  <input type="checkbox" ng-click="makePresenter(author.username)">Presenter
-		  <button ng-click="removeAuthor(author)" class="btn" style="margin-left: 10px; border-radius:0;">Remove</button>
-		</div>
-	      </li>
-	    </ol>
+	      </div>
+	    </div>
 	  </div>
 	</div>
 	<!-- Add author button -->
-	<div style="margin-top: 5px;" ng-show="!addAuthor">
-	  <button class="btn btn-default" ng-click="showAddAuthorForm()">Add Author</button>
+	  <div style="margin-top: 5px;" ng-show="!addAuthor">
+	    <button class="btn btn-default" ng-click="showAddAuthorForm()">Add Author</button>
+	  </div>
 	</div>
-      </div>
       
 
       <!-- Add author sub form -->
@@ -148,7 +159,7 @@
 		<div>
 		  <b>{{user.firstname}} {{user.lastname}}</b>
 		</div>
-		<div>{{user.descipline}}, {{user.descipline}}, {{user.institution}}</div>
+		<div>{{getUserAffiliation(user)}}</div>
 	      </div>
 	    </div>
 	  </div>
@@ -191,6 +202,20 @@
 		 name="email" ng-model="authorFormData.email" 
 		 placeholder="Author's Email" required> 
 	</div>
+	
+	<div class="form-group"
+	     ng-show = "authorNotListed"
+	     ng-class="{'has-warning': !abstractForm.discipline.$dirty, 
+		       'has-error': abstractForm.discipline.$invalid && abstractForm.discipline.$dirty,
+		       'has-success': abstractForm.discipline.$valid}">
+	  <select name="discipline" class="form-control" 
+		  ng-model="authorFormData.discipline"
+		  ng-options="discipline.id as discipline.name for discipline in disciplines | orderBy: 'name'" required>
+	    <option value="">Plese select author's discipline.</option>
+	  </select>
+	</div>
+
+	
 	<div class="form-group" ng-show="authorNotListed"
 	     ng-class="{'has-error': abstractForm.institution.$invalid,
 		       'has-success': abstractForm.institution.$valid}">
@@ -201,16 +226,61 @@
 	  </select>
 	</div>
 	
-	<div class="form-group" ng-show="authorNotListed"
+	<div class="form-group" ng-show="authorNotListed && authorFormData.institution == '2'"
 	     ng-class="{'has-error': abstractForm.department.$invalid,
 		       'has-success': abstractForm.department.$valid}">
 	  <select name="department" class="form-control" 
 		  ng-model="authorFormData.department"
-		  ng-options="department.dpt_id as department.title for department in departments | orderBy: 'title'" required>
+		  ng-options="department.id as department.title for department in departments | orderBy: 'title'" required>
 	    <option value="">Plese select Department of the author.</option>
 	  </select>
 	</div>
 	
+	     <!-- Add institution sub form -->
+
+      <div ng-show="authorFormData.institution == '1'">
+	  <div>
+	    <div class="has-feedback form-group" 
+		 ng-class="{'has-error': abstractForm.instName.$invalid && !abstractForm.instName.$dirty,
+			   'has-warning': abstractForm.instName.$invalid && abstractForm.instName.$dirty,
+			   'has-success': abstractForm.instName.$valid
+			   }">
+	      <input type="text" class="form-control" 
+		     placeholder="Name of Institution" 
+		     name="instName"
+		     ng-model="authorFormData.instname"
+		     required>
+	    </div>
+	    <div class="row form-group">
+	       <div class="col-md-3"
+		   ng-class="{'has-error': abstractForm.instCity.$invalid && !abstractForm.instCity.$dirty,
+			     'has-warning': abstractForm.instCity.$invalid && abstractForm.instCity.$dirty,
+			     'has-success': abstractForm.instCity.$valid
+			     }">
+		<input type="text" class="form-control" name="instCity" ng-model="authorFormData.instcity" placeholder="City" required>
+	      </div>
+
+
+ <div class="col-md-3"
+		   ng-class="{'has-error': abstractForm.instState.$invalid && !abstractForm.instState.$dirty,
+			     'has-warning': abstractForm.instState.$invalid && abstractForm.instState.$dirty,
+			     'has-success': abstractForm.instState.$valid
+			     }">
+		<input type="text" class="form-control" name="instState" ng-model="authorFormData.inststate" placeholder="State" required>
+	      </div>
+	      <div class="col-md-3"
+		   ng-class="{'has-error': abstractForm.instZip.$invalid && !abstractForm.instZip.$dirty,
+			     'has-warning': abstractForm.instZip.$invalid && abstractForm.instZip.$dirty,
+			     'has-success': abstractForm.instZip.$valid
+			     }">
+		
+		<input type="text" class="form-control" name="instZip" placeholder="Zip" ng-model="authorFormData.instzip" required>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
 	<button class="btn btn-primary" ng-click="addAuthorToList()" 
 		ng-show="authorNotListed" ng-disabled="!authorFormIsValid()">
 	  Add new Author 
@@ -218,8 +288,8 @@
 	<button class="btn btn-primary" ng-click="showAddNewAuthorForm()"
 		ng-show="!authorNotListed"> Not in List </button>
 	<button class="btn btn-primary" ng-click="cancelAddingAuthor()">Cancel</button>
-      </div>
-      
+      </div>	
+     
       <!-- Type of presentation  -->
       <div class="form-group has-feedback" 
 	   ng-class="{'has-warning': abstractForm.type.$invalid,
@@ -299,24 +369,15 @@
 	</b>
       </div>
       <br>
+      <div class="alert alert-danger" ng-show="errors">
+	<ol>
+	  <li ng-repeat="error in errors"> {{error}} </li>
+	</ol>
+      </div>
       <div class="form-group">
 	  <button type="submit" class="btn btn-primary" ng-click="submitAbstract()" ng-disabled="!abstractFormIsValid()">Submit</button>
      </div>
     </form>
-    
-    <div class="preview box">
-      <div class="box-header">
-	<h4>This is how the reviewer see your abstract. If you need to change any thing please do so now.</h4>
-      </div>
-      <div class="box-container">
-	<p>
-	  <h4 style="color:black"><b>{{formData.title}}</b></h4>
-	</p>
-	<div ng-bind-html="formData.abstract | to_trusted"></div>
-	<p>
-	  <div><b>Faculty Advisor</b>: {{formData.advisor}}</div>
-	</p>
-      </div>
-    </div>
   </div>
 </div>
+

@@ -9,7 +9,7 @@ function signup($request){
   $classification = (isset($request->classification)? $request->classification : null);
   $institution = $request->institution;
   $department = (isset($request->department)? $request->department: null);
-  $discipline = $request->discipline;
+  $discipline =(isset($request->discipline)? $request->discipline: null);
   $ip = preg_replace('#[^0-9.]#', '', getenv('REMOTE_ADDR'));
   $email_check = R::getAll( 'select * from user where email = :email', 
                             array(':email'=>$email));
@@ -31,7 +31,7 @@ function signup($request){
     if($institution == '1' || $institution == 1){
       $inst = R::dispense('institution');
       $inst->name = $request->instname;
-      $address = $request->instcity + ', ' + $request->inststate + ' '+ $request->instzip;
+      $address = $request->instcity + ', ' . $request->inststate . ' ' . $request->instzip;
       $inst->address = $address;
       $user1->institution = R::store($inst);
     }else{

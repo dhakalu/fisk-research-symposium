@@ -7,7 +7,6 @@
     <h4> SignUp for Fisk Research Symposium App</h4>
     </div>
     <div class="modal-body">
-      {{user}}
       <form name="signupForm">
 	<!-- User name -->
 	<div class="form-group has-feedback" 
@@ -106,7 +105,7 @@
 		       'has-success': signupForm.discipline.$valid}">
 	  <select name="discipline" class="form-control" 
 		  ng-model="user.discipline"
-		  ng-options="discipline.did as discipline.name for discipline in disciplines | orderBy: 'name'" required>
+		  ng-options="discipline.id as discipline.name for discipline in disciplines | orderBy: 'name'" required>
 	    <option value="">Plese select your discipline.</option>
 	  </select>
 	</div>
@@ -173,7 +172,7 @@
 		       'has-success': signupForm.department.$valid}">
 	  <select name="department" class="form-control" 
 		  ng-model="user.department"
-		  ng-options="department.dpt_id as department.title for department in departments | orderBy: 'title'" required>
+		  ng-options="department.id as department.title for department in departments | orderBy: 'title'" required>
 	    <option value="">Plese select Department of the author.</option>
 	  </select>
 	</div>  

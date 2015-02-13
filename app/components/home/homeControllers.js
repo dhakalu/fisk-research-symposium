@@ -12,22 +12,22 @@ homePageModule.controller('slideShowController', function ($scope) {
     slides.push(new image('assests/img/home/slideshow4.JPG'));
 });
 
-homePageModule.controller('loginFormController', ['$scope','$sce', '$modal','$http','$location', function($scope, $sce, $modal, $http, $location) {
+homePageModule.controller('loginFormController', ['$rootScope','$scope','$sce', '$modal','$http','$location', function($rootScope, $scope, $sce, $modal, $http, $location, $route) {
     $scope.user = {};
     $scope.user.login = true;
     $scope.login = function(){
-	console.log("Hello from login");
 	if(true)$http
 	    .post('assests/php_scripts/login.php', $scope.user)
 	    .success(function(data){
-		console.log(data);
-		if(data == "login_sucess"){
+		console.log(data.status);
+		if(data.status.trim() == "login_sucess"){
 		    $location.path('#/');
-		}else{
-		    $scope.error = $sce.trustAsHtml(data);
+		    $rootScope.root_user = data.user;
+		    $route.reload();
+		}else if(data.status.trim() == 'ERR'){
+		    $scope.error = $sce.trustAsHtml(data.error);
 		}
 	    });
-	console.log($scope.user);
     };
 }]);
 
@@ -109,7 +109,6 @@ angular.module('openModalDirective', ['ui.bootstrap'])
             $scope.cancel = function() {
 		$modalInstance.dismiss('cancel');
             };
-	    
 	     $scope.ok = function() {
 		$modalInstance.close();
 	    };

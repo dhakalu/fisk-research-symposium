@@ -1,0 +1,85 @@
+<div class="modal-content" >
+  <div class="modal-header">
+    <h3>Add the author's Affiliation</h3>
+  </div>
+  <div class="modal-body">
+    <form name="authorAffiliationForm">
+      <!-- Discipline -->
+      <div class="form-group" 
+	   ng-class="{'has-warning': !authorAffiliationForm.discipline.$dirty, 
+		     'has-error': authorAffiliationForm.discipline.$invalid && authorAffiliationForm.discipline.$dirty,
+		     'has-success': authorAffiliationForm.discipline.$valid}">
+	<select name="discipline" class="form-control" 
+		ng-model="addAffiliationFormData.discipline"
+		ng-options="discipline.id as discipline.name for discipline in disciplines | orderBy: 'name'" required>
+	  <option value="">Plese select your discipline.</option>
+	</select>
+      </div>
+      
+
+
+      <div class="form-group" 
+	   ng-class="{'has-error': authorAffiliationForm.institution.$invalid,
+		     'has-success': authorAffiliationForm.institution.$valid}">
+	<select name="institution" class="form-control" 
+		ng-model="addAffiliationFormData.institution"
+		ng-options="institution.id as institution.name for institution in institutions | orderBy: 'name'" required>
+	  <option value="">Plese select institution of the author.</option>
+	</select>
+      </div>
+      <div class="form-group" ng-show="addAffiliationFormData.institution =='2'" 
+	   ng-class="{'has-error': authorAffiliationForm.department.$invalid, 'has-success': authorAffiliationForm.department.$valid}">
+	<select name="department" class="form-control" 
+		ng-model="addAffiliationFormData.department"
+		ng-options="department.id as department.title for department in departments | orderBy: 'title'" required>
+	  <option value="">Plese select Department of the author.</option>
+	</select>
+      </div>
+      <div ng-show="addAffiliationFormData.institution == '1'">
+	<div>
+	  <div class="has-feedback form-group" 
+	       ng-class="{'has-error': authorAffiliationForm.instName.$invalid && !authorAffiliationForm.instName.$dirty,
+			 'has-warning': authorAffiliationForm.instName.$invalid && authorAffiliationForm.instName.$dirty,
+			 'has-success': authorAffiliationForm.instName.$valid
+			 }">
+	    <input type="text" class="form-control" 
+		   placeholder="Name of Institution" 
+		   name="instName"
+		   ng-model="addAffiliationFormData.instname"
+		   required>
+	  </div>
+	  <div class="row form-group">
+	    <div class="col-md-3"
+		 ng-class="{'has-error': authorAffiliationForm.instCity.$invalid && !authorAffiliationForm.instCity.$dirty,
+			   'has-warning': authorAffiliationForm.instCity.$invalid && authorAffiliationForm.instCity.$dirty,
+			   'has-success': authorAffiliationForm.instCity.$valid
+			   }">
+	      <input type="text" class="form-control" name="instCity" ng-model="addAffiliationFormData.instcity" placeholder="City" required>
+	    </div>
+
+	    
+	    <div class="col-md-3"
+		 ng-class="{'has-error': authorAffiliationForm.instState.$invalid && !authorAffiliationForm.instName.$dirty,
+			   'has-warning': authorAffiliationForm.instState.$invalid && authorAffiliationForm.instState.$dirty,
+			   'has-success': authorAffiliationForm.instState.$valid
+			   }">
+	      <input type="text" class="form-control" name="instState" ng-model="addAffiliationFormData.inststate" placeholder="State" required>
+	    </div>
+	    <div class="col-md-3"
+		 ng-class="{'has-error': authorAffiliationForm.instZip.$invalid && !authorAffiliationForm.instZip.$dirty,
+			   'has-warning': authorAffiliationForm.instZip.$invalid && authorAffiliationForm.instZip.$dirty,
+			   'has-success': authorAffiliationForm.instZip.$valid
+			     }">
+	      
+	      <input type="text" class="form-control" name="instZip" placeholder="Zip" ng-model="addAffiliationFormData.instzip" required>
+	    </div>
+	  </div>
+	</div>
+    </form>
+      </div>
+  </div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()"> Cancel</button>
+  <button class="btn btn-primary" ng-click="addAffiliation()"> Add author's affiliation</button>
+</div>
+
